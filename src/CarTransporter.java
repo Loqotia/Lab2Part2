@@ -11,12 +11,19 @@ public class CarTransporter extends Vehicle implements IStorage<Vehicle> {
     private Stack<Vehicle> storedCars;
     private double storageLengthUsed;
 
+
+
     public CarTransporter() {
         super(2, 730, Color.pink, "Car Transporter", STORAGE_LENGTH + 2, STORAGE_WIDTH + 0.44);
         ramp = new Ramp(-30, 90,90);
         storedCars = new Stack<>();
         storageLengthUsed = STORAGE_LENGTH;
     }
+
+    public boolean getNeutralPos(){return this.ramp.isInNeutralPos();} //Only used in test!!!
+
+    public double getStorageLength(){return storageLengthUsed;} //used only i test!!!
+
 
     private boolean vehicleInRange(Vehicle vehicle) {
         double xDist = vehicle.getX() - getX();
@@ -25,7 +32,7 @@ public class CarTransporter extends Vehicle implements IStorage<Vehicle> {
     }
 
     private boolean vehicleFits(Vehicle vehicle) {
-        boolean lengthFit = storageLengthUsed + vehicle.getLength() <= STORAGE_LENGTH;
+        boolean lengthFit = storageLengthUsed - vehicle.getLength() >= 0;
         boolean widthFit = vehicle.getWidth() <= STORAGE_WIDTH;
         return lengthFit && widthFit;
     }
@@ -60,11 +67,11 @@ public class CarTransporter extends Vehicle implements IStorage<Vehicle> {
     // From ITransporter
 
     public void loadStorable(Vehicle storable) {
-        if (!ramp.isInNeutralPos() && vehicleInRange(storable) && vehicleFits(storable)) {
+        if (ramp.isInNeutralPos() && vehicleInRange(storable) && vehicleFits(storable)) {
             storedCars.push(storable);
             storable.setStorage(this);
-            storageLengthUsed += storable.getLength();
-        }
+            storageLengthUsed -= storable.getLength();
+        }//
     }
 
     public Vehicle unloadStorable() {
@@ -72,11 +79,10 @@ public class CarTransporter extends Vehicle implements IStorage<Vehicle> {
 
         double dropOffX;
         double dropOffY;
-        if (!storedCars.isEmpty() && !ramp.isInNeutralPos()) {
+        if (!storedCars.isEmpty() && ramp.isInNeutralPos()) {
             vehicle = storedCars.pop();
-            storageLengthUsed -= vehicle.getLength();
+            storageLengthUsed += vehicle.getLength();
 
-            // Drop off point is behind car transport;
             dropOffX = getX() - Math.cos(getDirection()) * getLength();
             dropOffY = getY() - Math.sin(getDirection()) * getLength();
             vehicle.setX(dropOffX);
