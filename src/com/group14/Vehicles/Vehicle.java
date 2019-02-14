@@ -1,13 +1,18 @@
+package com.group14.Vehicles;
+
 /* Vehicle.java
  * 2019-02-11
  */
 
 import java.awt.Color;
+import com.group14.Misc.IMovable;
+import com.group14.Storage.IStorage;
+import com.group14.Storage.IStorable;
 
 /**
  *  This is an abstract representation of a functional vehicle that can move around in 2D-space.
  *  This abstract class implements the <tt>Movable</tt> interface in order to move and turn
- *  the car and <tt>IStorable</tt> to store other vehicle.
+ *  the car and <tt>com.group14.Storage.IStorable</tt> to store other vehicle.
  *
  * @see Saab95
  * @see Volvo240

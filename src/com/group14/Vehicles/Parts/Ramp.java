@@ -1,4 +1,6 @@
-/* Scania.java
+package com.group14.Vehicles.Parts;
+
+/*
  * 2019-02-11
  */
 
@@ -61,7 +63,7 @@ public class Ramp {
      * @param angle the angle by which to to lower the ramp
      */
     public void lower(double angle) {
-        if (this.angle - angle < maxAngle) { angle = minAngle; }
+        if (this.angle - angle < minAngle) { angle = minAngle; }
         else {this.angle -= angle;}
     }
 

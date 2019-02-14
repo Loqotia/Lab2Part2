@@ -1,4 +1,6 @@
-/* Vehicle.java
+package com.group14.Misc;
+
+/*
  * 2019-02-11
  */
 

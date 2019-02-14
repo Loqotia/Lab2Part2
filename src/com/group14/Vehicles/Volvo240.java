@@ -1,6 +1,9 @@
-/* Vehicle.java
- * 2019-02-11
+package com.group14.Vehicles;
+
+/*
+ *2019-02-11
  */
+
 import java.awt.*;
 
 /**
@@ -30,7 +33,7 @@ public class Volvo240 extends Vehicle {
      * @see Vehicle
      */
     public Volvo240(){
-        super(4, 100, Color.BLACK, "Volvo240", 4.9, 1.71);
+        super(4, 100, Color.BLACK, "com.group14.Vehicles.Volvo240", 4.9, 1.71);
     }
 
     /**

@@ -1,15 +1,16 @@
-/* Workshop.java
+package com.group14.Storage;/* com.group14.Storage.Workshop.java
  * 2019-02-11
  */
 import java.util.ArrayList;
+import com.group14.Vehicles.Vehicle;
 
 /**
- * This class represents a Workshop that can store cars of any type. It can specialize in a specific type as well!
- * Its storage capabilities comes from IStorage!
+ * This class represents a com.group14.Storage.Workshop that can store cars of any type. It can specialize in a specific type as well!
+ * Its storage capabilities comes from com.group14.Storage.IStorage!
  *
  * @param <T> type of vehicle
  * @see IStorage
- * @see Vehicle
+ * @see com.group14.Vehicles.Vehicle
  */
 public class Workshop <T extends Vehicle> implements IStorage<T> {
     /**
@@ -29,7 +30,7 @@ public class Workshop <T extends Vehicle> implements IStorage<T> {
     private int highlightedIndex;
 
     /**
-     * Constructs a Workshop with a specified storage space. Nothing is highlighted by default as there is no
+     * Constructs a com.group14.Storage.Workshop with a specified storage space. Nothing is highlighted by default as there is no
      * Vehicle stored by default.
      *
      * @param storageSpace the amount of vehicles that can be stored
@@ -41,7 +42,7 @@ public class Workshop <T extends Vehicle> implements IStorage<T> {
     }
 
     /**
-     * Constructs a Workshop with a specified storage space.
+     * Constructs a com.group14.Storage.Workshop with a specified storage space.
      *
      * @param storageSpace the amount of vehicles that can be stored
      */
@@ -66,7 +67,7 @@ public class Workshop <T extends Vehicle> implements IStorage<T> {
     }
 
     /**
-     * Store a Vehicle in the workshop. If the Workshop is out of storage space, nothing will be stored. If the
+     * Store a Vehicle in the workshop. If the com.group14.Storage.Workshop is out of storage space, nothing will be stored. If the
      * user tries to store a Vehicle that is stored some place else, nothing is stored.
      *
      * @param car the Vehicle to store

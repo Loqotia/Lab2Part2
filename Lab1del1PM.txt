@@ -18,11 +18,11 @@ godkänns i denna labb kommer senare att användas i Laboration 2.
 == Uppgift a) - Arv och gränssnitt ==
 
 Börja med att klona repot https://github.com/niklasbroberg/DIT953-lab1 och kika
-lite i det. För närvarande finns det två Java-filer, Volvo240.java och Saab95.java.
+lite i det. För närvarande finns det två Java-filer, com.group14.Vehicles.Volvo240.java och com.group14.Vehicles.Saab95.java.
 Just nu verkar klasserna ha ganska mycket gemensamt, eftersom båda representerar
 bilar.
 
-- Skapa en arvshierarki där Volvo240 och Saab95 ingår som eliminerar all
+- Skapa en arvshierarki där com.group14.Vehicles.Volvo240 och com.group14.Vehicles.Saab95 ingår som eliminerar all
 kod-duplicering och i görligaste mån följer open-closed-principen. Gör dessa
 ändringar utan att ändra på klassernas funktionalitet.
 

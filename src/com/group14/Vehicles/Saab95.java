@@ -1,4 +1,6 @@
-/* Saab95.java
+package com.group14.Vehicles;
+
+/*
  * 2019-02-11
  */
 
@@ -31,7 +33,7 @@ public class Saab95 extends Vehicle {
      * @see Vehicle
      */
     public Saab95(){
-        super(2, 125, Color.red, "Saab95", 4.16, 1.57);
+        super(2, 125, Color.red, "com.group14.Vehicles.Saab95", 4.16, 1.57);
         turboOn = false;
     }
 

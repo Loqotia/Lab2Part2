@@ -1,3 +1,5 @@
+import com.group14.Vehicles.Saab95;
+import com.group14.Vehicles.Volvo240;
 import org.junit.Before;
 import org.junit.Test;
 import java.awt.Color;
@@ -67,7 +69,7 @@ public class MoveTest {
         assertTrue(saab.getNrDoors() == 2
                 && saab.getEnginePower() == 125
                 && saab.getColor() == Color.red
-                && saab.getModelName().equals("Saab95"));
+                && saab.getModelName().equals("com.group14.Vehicles.Saab95"));
     }
 
     @Test
@@ -75,7 +77,7 @@ public class MoveTest {
         assertTrue(volvo.getNrDoors() == 4
                 && volvo.getEnginePower() == 100
                 && volvo.getColor() == Color.black
-                && volvo.getModelName().equals("Volvo240"));
+                && volvo.getModelName().equals("com.group14.Vehicles.Volvo240"));
     }
 
     @Test
