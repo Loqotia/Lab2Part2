@@ -86,4 +86,36 @@ public class CarController {
             car.brake(brake);
         }
     }
+
+    void turboOn() {
+        Saab95 saab = (Saab95) cars.get(1);
+        saab.setTurboOn();
+    }
+
+    void turboOff() {
+        Saab95 saab = (Saab95) cars.get(1);
+        saab.setTurboOff();
+    }
+
+    void raiseRamp() {
+        Scania scania = (Scania) cars.get(2);
+        scania.raiseFlatbed(70);
+    }
+
+    void lowerRamp() {
+        Scania scania = (Scania) cars.get(2);
+        scania.lowerFlatbed(70);
+    }
+
+    void start() {
+        for (Vehicle car : cars) {
+            car.startEngine();
+        }
+    }
+
+    void stop() {
+        for (Vehicle car : cars) {
+            car.stopEngine();
+        }
+    }
 }
