@@ -9,8 +9,6 @@ import java.util.ArrayList;
 // This panel represent the animated part of the view with the car images.
 
 public class DrawPanel extends JPanel{
-
-    // Just a single image, TODO: Generalize
     BufferedImage volvoImage;
     BufferedImage saabImage;
     BufferedImage scaniaImage;
@@ -57,7 +55,6 @@ public class DrawPanel extends JPanel{
     }
 
     // This method is called each time the panel updates/refreshes/repaints itself
-    // TODO: Change to suit your needs.
     @Override
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
