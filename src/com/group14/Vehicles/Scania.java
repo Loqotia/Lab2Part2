@@ -34,8 +34,8 @@ public class Scania extends Vehicle {
      *
      * @see Vehicle
      */
-    public Scania(){
-        super(2, 730, Color.yellow, "com.group14.Vehicles.Scania", 8.53, 2.44);
+    public Scania(double x, double y){
+        super(2, 730, Color.yellow, "Scania", 8.53, 2.44, x, y);
         flatBed = new Ramp(0, 70, 0);
     }
 

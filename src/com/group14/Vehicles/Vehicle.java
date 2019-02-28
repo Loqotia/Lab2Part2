@@ -86,15 +86,15 @@ public abstract class Vehicle implements IMovable, IStorable {
      *
      * @param width is the width of the car
      */
-    public Vehicle(int nrDoors, double enginePower, Color color, String modelName, double length, double width){
+    public Vehicle(int nrDoors, double enginePower, Color color, String modelName, double length, double width, double x, double y){
         this.nrDoors = nrDoors;
         this.enginePower = enginePower;
         this.color = color;
         this.modelName = modelName;
         this.length = length;
         this.width = width;
-        x = 0;
-        y = 0;
+        this.x = x;
+        this.y = y;
         direction = 0;
         storedBy = null;
         stopEngine();

@@ -32,8 +32,8 @@ public class Saab95 extends Vehicle {
      *
      * @see Vehicle
      */
-    public Saab95(){
-        super(2, 125, Color.red, "com.group14.Vehicles.Saab95", 4.16, 1.57);
+    public Saab95(double x, double y){
+        super(2, 125, Color.red, "Saab95", 4.16, 1.57, x, y);
         turboOn = false;
     }
 

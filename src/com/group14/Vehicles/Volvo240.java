@@ -32,8 +32,8 @@ public class Volvo240 extends Vehicle {
      *
      * @see Vehicle
      */
-    public Volvo240(){
-        super(4, 100, Color.BLACK, "com.group14.Vehicles.Volvo240", 4.9, 1.71);
+    public Volvo240(double x, double y){
+        super(4, 100, Color.BLACK, "Volvo240", 4.9, 1.71, x, y);
     }
 
     /**

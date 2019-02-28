@@ -60,8 +60,8 @@ public class CarTransporter extends Vehicle implements IStorage<Vehicle> {
      *
      * @see Vehicle
      */
-    public CarTransporter() {
-        super(2, 730, Color.pink, "Car Transporter", STORAGE_LENGTH + 2, STORAGE_WIDTH + 0.44);
+    public CarTransporter(double x, double y) {
+        super(2, 730, Color.pink, "Car Transporter", STORAGE_LENGTH + 2, STORAGE_WIDTH + 0.44, x, y);
         ramp = new Ramp(-30, 90,90);
         storedCars = new Stack<>();
         storageLeft = STORAGE_LENGTH;

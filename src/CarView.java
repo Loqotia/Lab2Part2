@@ -1,113 +1,99 @@
+import java.awt.*;
 import javax.swing.*;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
-import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 
-/**
- * This class represents the full view of the MVC pattern of your car simulator.
- * It initializes with being center on the screen and attaching it's controller in it's state.
- * It communicates with the Controller by calling methods of it when an action fires of in
- * each of it's components.
- **/
-
-public class CarView extends JFrame{
-    private static final int X = 800;
-    private static final int Y = 800;
-
-    // The controller member
-    CarController carC;
-
-    DrawPanel drawPanel = new DrawPanel(X, Y-240);
-
-    JPanel controlPanel = new JPanel();
-
-    JPanel gasPanel = new JPanel();
-    JSpinner gasSpinner = new JSpinner();
-    int gasAmount = 0;
-    JLabel gasLabel = new JLabel("Amount of gas");
-
-    JButton gasButton = new JButton("Gas");
-    JButton brakeButton = new JButton("Brake");
-    JButton turboOnButton = new JButton("Saab Turbo on");
-    JButton turboOffButton = new JButton("Saab Turbo off");
-    JButton liftBedButton = new JButton("Scania Lift Bed");
-    JButton lowerBedButton = new JButton("Lower Lift Bed");
-
-    JButton startButton = new JButton("Start all cars");
-    JButton stopButton = new JButton("Stop all cars");
-
-    // Constructor
-    public CarView(String framename, CarController cc){
-        this.carC = cc;
-        initComponents(framename);
+public class CarView implements IObserver{
+    public enum Button {
+        GAS,
+        TURBO_ON,
+        LIFT_BED,
+        BRAKE,
+        TURBO_OFF,
+        LOWER_BED,
+        START,
+        STOP
     }
 
-    // Sets everything in place and fits everything
-    private void initComponents(String title) {
+    private ImageLoader imageLoader;
+    private JFrame frame;
+    private DrawPanel drawPanel;
+    private JPanel controlPanel;
+    private JPanel gasPanel;
+    private JSpinner gasSpinner;
+    private JLabel gasLabel;
+    private JButton[] buttons;
 
-        this.setTitle(title);
-        this.setPreferredSize(new Dimension(X,Y));
-        this.setLayout(new FlowLayout(FlowLayout.LEFT, 0, 0));
+    public CarView(String title, int screenWidth, int screenHeight) {
+        frame = new JFrame();
+        frame.setTitle(title);
+        frame.setPreferredSize(new Dimension(screenWidth, screenHeight));
+        frame.setLayout(new FlowLayout(FlowLayout.LEFT, 0, 0));
 
-        this.add(drawPanel);
+        drawPanel = new DrawPanel(screenWidth, screenHeight - 240);
+        frame.add(drawPanel);
 
-
-
-        SpinnerModel spinnerModel = new SpinnerNumberModel(0, 0, 100, 1);
-        gasSpinner = new JSpinner(spinnerModel);
-        gasSpinner.addChangeListener(e -> gasAmount = (int) ((JSpinner)e.getSource()).getValue());
-
+        gasSpinner = new JSpinner(new SpinnerNumberModel(0, 0, 100, 1));
         gasPanel.setLayout(new BorderLayout());
         gasPanel.add(gasLabel, BorderLayout.PAGE_START);
         gasPanel.add(gasSpinner, BorderLayout.PAGE_END);
+        frame.add(gasPanel);
 
-        this.add(gasPanel);
+        buttons = new JButton[8];
+        buttons[Button.GAS.ordinal()] = new JButton("Gas");
+        buttons[Button.BRAKE.ordinal()] = new JButton("Brake");
+        buttons[Button.TURBO_OFF.ordinal()] = new JButton("Saab Turbo on");
+        buttons[Button.TURBO_ON.ordinal()] = new JButton("Saab Turbo off");
+        buttons[Button.LIFT_BED.ordinal()] = new JButton("Scania Lift Bed");
+        buttons[Button.LOWER_BED.ordinal()] = new JButton("Lower Lift Bed");
+        buttons[Button.START.ordinal()] = new JButton("Start all cars");
+        buttons[Button.STOP.ordinal()] = new JButton("Stop all cars");
 
         controlPanel.setLayout(new GridLayout(2,4));
+        controlPanel.add(buttons[Button.GAS.ordinal()], 0);
+        controlPanel.add(buttons[Button.TURBO_ON.ordinal()], 1);
+        controlPanel.add(buttons[Button.LIFT_BED.ordinal()], 2);
+        controlPanel.add(buttons[Button.BRAKE.ordinal()], 3);
+        controlPanel.add(buttons[Button.TURBO_OFF.ordinal()], 4);
+        controlPanel.add(buttons[Button.LOWER_BED.ordinal()], 5);
+        controlPanel.setPreferredSize(new Dimension((screenWidth / 2) + 4, 200));
 
-        controlPanel.add(gasButton, 0);
-        controlPanel.add(turboOnButton, 1);
-        controlPanel.add(liftBedButton, 2);
-        controlPanel.add(brakeButton, 3);
-        controlPanel.add(turboOffButton, 4);
-        controlPanel.add(lowerBedButton, 5);
-        controlPanel.setPreferredSize(new Dimension((X/2)+4, 200));
-        this.add(controlPanel);
-        controlPanel.setBackground(Color.CYAN);
+        buttons[Button.START.ordinal()].setBackground(Color.blue);
+        buttons[Button.START.ordinal()].setForeground(Color.green);
+        buttons[Button.START.ordinal()].setPreferredSize(new Dimension(screenWidth / 5 - 15, 200));
+        frame.add(buttons[Button.START.ordinal()]);
 
+        buttons[Button.STOP.ordinal()].setBackground(Color.red);
+        buttons[Button.STOP.ordinal()].setForeground(Color.black);
+        buttons[Button.STOP.ordinal()].setPreferredSize(new Dimension(screenWidth / 5 - 15, 200));
+        frame.add(buttons[Button.STOP.ordinal()]);
 
-        startButton.setBackground(Color.blue);
-        startButton.setForeground(Color.green);
-        startButton.setPreferredSize(new Dimension(X/5-15,200));
-        this.add(startButton);
+        frame.pack();
 
-        stopButton.setBackground(Color.red);
-        stopButton.setForeground(Color.black);
-        stopButton.setPreferredSize(new Dimension(X/5-15,200));
-        this.add(stopButton);
-
-        // Action listeners
-        gasButton.addActionListener(e -> carC.gas(gasAmount));
-        brakeButton.addActionListener(e -> carC.brake(gasAmount));
-        turboOnButton.addActionListener(e -> carC.turboOn());
-        turboOffButton.addActionListener(e -> carC.turboOff());
-        liftBedButton.addActionListener(e -> carC.raiseRamp());
-        lowerBedButton.addActionListener(e -> carC.lowerRamp());
-        startButton.addActionListener(e -> carC.start());
-        stopButton.addActionListener(e -> carC.stop());
-
-        // Make the frame pack all it's components by respecting the sizes if possible.
-        this.pack();
-
-        // Get the computer screen resolution
         Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
-        // Center the frame
-        this.setLocation(dim.width/2-this.getSize().width/2, dim.height/2-this.getSize().height/2);
-        // Make the frame visible
-        this.setVisible(true);
-        // Make sure the frame exits when "x" is pressed
-        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setLocation(dim.width / 2 - frame.getSize().width / 2, dim.height / 2 - frame.getSize().height / 2);
+        frame.setVisible(true);
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     }
+
+    public void mapBehaviorToButton(int buttonIndex, ActionListener behavior) {
+        buttons[buttonIndex].addActionListener(behavior);
+    }
+
+    public void mapBehaviorToSpinner(ChangeListener behavior) {
+        gasSpinner.addChangeListener(behavior);
+    }
+
+    // From IObserver
+    public void sendMessage(ArrayList<CarMessage> carMessages) {
+        for (int i = 0; i < carMessages.size(); i++) {
+            CarMessage m = carMessages.get(i);
+            drawPanel.queryDrawCall(imageLoader.getImage(m.getImageKey()), m.getCarX(), m.getCarY());
+        }
+        drawPanel.repaint();
+    }
+
 }
